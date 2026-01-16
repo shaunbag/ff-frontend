@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import './App.css'
 import CharacterCreationSheet from './components/CharacterCreationSheet';
 import { useCharacterStore } from './store';
+import CharacterSelect from './components/CharactersSelect';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     <>
     <main>
       <h1>Fighting Fantasy Character Tracking</h1>
+      <CharacterSelect />
       <p>Current Character: {character?.name}</p>
       {
         character.name ? (
