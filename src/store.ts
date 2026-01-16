@@ -1,6 +1,14 @@
 import { create } from "zustand";
 
-type Character = {
+export type Character = {
+    id: number;
+    name: string;
+    skill: number;
+    stamina: number;
+    luck: number;
+    gold: number;
+}
+export type CharacterToCreate = {
     name: string;
     skill: number;
     stamina: number;
@@ -18,10 +26,13 @@ type CharacterStore = {
     setCharacter: (character: Character) => void;
     progress?: Progress;
     setProgress?: (progress: Progress) => void;
+    allCharacters: Character[];
+    setAllCharacters: (allCharacters: Character[]) => void;
 }
 
 export const useCharacterStore = create<CharacterStore>((set) => ({
     character: {
+        id: 0,
         name: "",
         skill: 0,
         stamina: 0,
@@ -31,4 +42,6 @@ export const useCharacterStore = create<CharacterStore>((set) => ({
     setCharacter: (character: Character) => set({ character }),
     progress: undefined,
     setProgress: (progress: Progress) => set({ progress }),
+    allCharacters: [],
+    setAllCharacters: (allCharacters:  Character[]) => set({allCharacters})
 }))
