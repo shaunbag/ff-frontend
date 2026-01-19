@@ -28,10 +28,25 @@ async function apiGet<T>(endpoint: string) {
     return res.json() as Promise<T>
 }
 
+async function apiDelete(endpoint: string, id: number) {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/${endpoint}/${id}`, {
+        method: 'DELETE'
+    })
+
+    if(!res.ok) {
+        throw new Error(`DELETE ${endpoint} id ${id} Failed (${res.status})`)
+    }
+
+}
+
 export async function getAllCharacters(): Promise<Character[]> {
     return apiGet<Character[]>('api/all')
 }
 
 export async function createCharacter(character: CharacterToCreate): Promise<Character> {
     return apiPost('api/createcharacter', JSON.stringify(character))
+}
+
+export async function deleteCharacter(id: number): Promise<void> {
+    return apiDelete('api/character', id)
 }
