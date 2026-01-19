@@ -1,4 +1,4 @@
-import type { Character, CharacterToCreate } from "../store";
+import type { Character, CharacterDto } from "../store";
 
 async function apiPost<T>(endpoint: string, body: string) {
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/${endpoint}`, {
@@ -43,10 +43,14 @@ export async function getAllCharacters(): Promise<Character[]> {
     return apiGet<Character[]>('api/all')
 }
 
-export async function createCharacter(character: CharacterToCreate): Promise<Character> {
+export async function createCharacter(character: CharacterDto): Promise<Character> {
     return apiPost('api/createcharacter', JSON.stringify(character))
 }
 
 export async function deleteCharacter(id: number): Promise<void> {
     return apiDelete('api/character', id)
+}
+
+export async function updateCharacter(character: CharacterDto, id: number): Promise<Character> {
+    return apiPost(`api/createcharacter/${id}`, JSON.stringify(character))
 }

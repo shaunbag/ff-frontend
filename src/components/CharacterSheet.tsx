@@ -20,7 +20,7 @@ export default function CharacterSheet() {
             <div style={{textAlign: 'left'}}>
                 {
                     stats.map(stat => {
-                        return <div>
+                        return <div key={stat.key}>
                             {stat.label}: 
                             <button>-</button>
                             {character[stat.key]}
