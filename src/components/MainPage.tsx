@@ -22,7 +22,9 @@ export default function MainPage() {
     return (
         <>
             <h1>Fighting Fantasy Character Tracking</h1>
-            <button onClick={() => history('/select')}>SELECT A CHARACTER</button><button onClick={createNewCharacter}>CREATE NEW CHARACTER</button>
+            <button onClick={() => history('/select')}>SELECT A CHARACTER</button>
+            <button onClick={createNewCharacter}>CREATE NEW CHARACTER</button>
+            <button onClick={() => history('/battle')}>Fight A Battle</button>
             {
                 character.name ? (
                     <CharacterSheet />

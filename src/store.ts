@@ -8,7 +8,7 @@ export type Character = {
     luck: number;
     gold: number;
 }
-export type CharacterToCreate = {
+export type CharacterDto = {
     name: string;
     skill: number;
     stamina: number;
