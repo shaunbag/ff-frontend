@@ -33,8 +33,13 @@ export default function CharacterSelect() {
 
     return (
         <>
-        <h2>Selected Character: {character.name}</h2>
-        <button onClick={() => history('/')}>BACK</button>
+        <header className="page-header">
+            <h2>Selected Character: {character.name}</h2>
+            <div className="toolbar">
+                <button onClick={() => history('/')}>BACK</button>
+            </div>
+        </header>
+            <section className="panel">
             <table>
                 <thead>
                     <tr>
@@ -55,6 +60,7 @@ export default function CharacterSelect() {
                     }
                 </tbody>
             </table>
+            </section>
         </>
     )
 }
