@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { useCharacterStore, type Character, type CharacterDto } from "../store";
+import { useState } from "react";
+import { useCharacterStore } from "../store";
 import CharacterSheet from "./CharacterSheet";
-import { updateCharacter } from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import type { BattleResult } from "./BattleComponents/BattleModal";
+import BattleModal from "./BattleComponents/BattleModal";
+import { updateCharacterFromBattle } from "../utils/utilityFunctions";
 
 export type Enemy = {
     skill: number;
@@ -13,6 +15,8 @@ export default function BattleSheet() {
 
     const { character, setCharacter } = useCharacterStore()
     const [enemy, setEnemy] = useState<Enemy>({skill: 0, stamina: 0})
+    const [result, setResult] = useState<BattleResult | "">("")
+    const [showModal, setShowModal] = useState(false)
     const history = useNavigate()
 
     function fightABattle(){
@@ -24,10 +28,11 @@ export default function BattleSheet() {
             setEnemy(enemyUpdate)
 
             if(enemyUpdate.stamina <= 0){
-                alert("⚔️ You Destroyed the Enemy ⚔️")
+                setResult("enemy dead")
             } else {
-                alert("⚔️ You scored a hit ⚔️")
+                setResult("enemy wounded")
             }
+            setShowModal(true)
             return
         }
         if(playersRoll < enemiesRoll){
@@ -35,48 +40,51 @@ export default function BattleSheet() {
             setCharacter(playerUpdate)
 
             if(playerUpdate.stamina <= 0){
-                alert("💀 You have been Killed R.I.P 💀")
+                setResult("dead")
             } else {
-                alert("⚔️ You have been Wounded ⚔️")
+                setResult("wounded")
             }
             updateCharacterFromBattle(playerUpdate)
+            setShowModal(true)
             return
         }
         if(playersRoll === enemiesRoll){
-            alert("It was a Draw Fight again")
+            setResult("draw")
+            setShowModal(true)
             return
         }
-    }
-
-    function updateCharacterFromBattle(player: Character){
-        const characterDto: CharacterDto = {
-            name: player.name,
-            skill: player.skill,
-            luck: player.luck,
-            stamina: player.stamina,
-            gold: player.gold
-        }
-        updateCharacter(characterDto, player.id)
     }
 
     return (
         <div>
-            <h1>Battle</h1>
-            <button onClick={() => history('/')}>Back</button>
-            <div>
-                <div>
+            <header className="page-header">
+                <h1>Battle</h1>
+                <div className="toolbar">
+                    <button onClick={() => history('/')}>Back</button>
+                    <button onClick={() => fightABattle()}>Fight!</button>
+                </div>
+            </header>
+
+            <div className="two-col">
+                <section className="panel">
                     <CharacterSheet />
-                </div>
-                <div>
+                </section>
+
+                <section className="panel">
                     <h2>Enemy</h2>
-                    <label>Skill</label>
-                    <input type="number" placeholder="Skill" value={enemy.skill} onChange={(e) => setEnemy({...enemy, skill: Number(e.target.value)})} />
-                    
-                    <label>Stamina</label>
-                    <input type="number" placeholder="Stamina" value={enemy.stamina} onChange={(e) => setEnemy({...enemy, stamina: Number(e.target.value)})} />
-                </div>
+                    <div className="form-grid">
+                        <label>Skill</label>
+                        <input type="number" placeholder="Skill" value={enemy.skill} onChange={(e) => setEnemy({...enemy, skill: Number(e.target.value)})} />
+                        <label>Stamina</label>
+                        <input type="number" placeholder="Stamina" value={enemy.stamina} onChange={(e) => setEnemy({...enemy, stamina: Number(e.target.value)})} />
+                    </div>
+                </section>
             </div>
-            <button onClick={() => fightABattle()}>Fight!</button>
+            {
+                showModal && (
+                    <BattleModal result={result} setShowModal={setShowModal} fightAgain={fightABattle}/>
+                )
+            }
         </div>
     )
 }

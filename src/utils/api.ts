@@ -52,5 +52,5 @@ export async function deleteCharacter(id: number): Promise<void> {
 }
 
 export async function updateCharacter(character: CharacterDto, id: number): Promise<Character> {
-    return apiPost(`api/createcharacter/${id}`, JSON.stringify(character))
+    return apiPost(`api/character/${id}`, JSON.stringify(character))
 }

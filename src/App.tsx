@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    <main>
+    <main className="app">
       
       <Routes>
         <Route path='/' element={<MainPage />}/>
