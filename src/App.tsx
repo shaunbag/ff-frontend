@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage />}/>
         <Route path='/select' element={<CharacterSelect />}/>
-        <Route path='battle' element={<BattleSheet />}/>
+        <Route path='/battle' element={<BattleSheet />}/>
       </Routes>
 
     </main>

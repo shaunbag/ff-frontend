@@ -1,7 +1,7 @@
 import type { Character, CharacterDto } from "../store"
 import { updateCharacter } from "./api"
 
-export function updateCharacterFromBattle(player: Character){
+export function updateCharacterStats(player: Character){
         const characterDto: CharacterDto = {
             name: player.name,
             skill: player.skill,
