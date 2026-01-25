@@ -1,5 +1,5 @@
 import { useCharacterStore } from "../store"
-import { updateCharacterFromBattle } from "../utils/utilityFunctions";
+import { updateCharacterStats } from "../utils/utilityFunctions";
 
 type StatKey = "skill" | "stamina" | "luck" | "gold"
 
@@ -17,7 +17,7 @@ export default function CharacterSheet() {
     function updateStat(key: StatKey, value: number) {
         const updatedCharacter = { ...character, [key]: value }
         setCharacter(updatedCharacter)
-        updateCharacterFromBattle(updatedCharacter)
+        updateCharacterStats(updatedCharacter)
     }
 
     return (

@@ -4,7 +4,7 @@ import CharacterSheet from "./CharacterSheet";
 import { useNavigate } from "react-router-dom";
 import type { BattleResult } from "./BattleComponents/BattleModal";
 import BattleModal from "./BattleComponents/BattleModal";
-import { updateCharacterFromBattle } from "../utils/utilityFunctions";
+import { updateCharacterStats } from "../utils/utilityFunctions";
 
 export type Enemy = {
     skill: number;
@@ -44,7 +44,7 @@ export default function BattleSheet() {
             } else {
                 setResult("wounded")
             }
-            updateCharacterFromBattle(playerUpdate)
+            updateCharacterStats(playerUpdate)
             setShowModal(true)
             return
         }
