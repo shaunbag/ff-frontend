@@ -9,6 +9,7 @@ A React + TypeScript frontend application for tracking **Fighting Fantasy** game
 - **State management**: Zustand
 - **Routing**: React Router DOM
 - **Language**: TypeScript
+- **Styling**: Custom CSS with modern dark theme
 
 ## Features
 
@@ -16,10 +17,12 @@ A React + TypeScript frontend application for tracking **Fighting Fantasy** game
 - **Character Creation**: Create new characters with name, Skill, Stamina, Luck, and Gold stats
 - **Character Selection**: Browse and select from saved characters via a table interface
 - **Character Deletion**: Remove characters from your saved list
-- **Character Updates**: Automatically sync character stats after battles
+- **Character Updates**: Automatically sync character stats after battles and manual adjustments
+- **Real-time Stat Adjustments**: Increment/decrement buttons that automatically save changes to the backend
 
 ### Character Display
 - **Character Sheet**: View current character stats (Skill, Stamina, Luck, Gold) with increment/decrement buttons for manual adjustments
+- **Auto-save**: All stat changes are automatically persisted to the backend
 - **Real-time Updates**: Character stats update automatically after battles
 
 ### Battle System
@@ -28,12 +31,25 @@ A React + TypeScript frontend application for tracking **Fighting Fantasy** game
   - Roll-based combat (2d6 + Skill for both player and enemy)
   - Winner deals 2 Stamina damage
   - Automatic character updates after taking damage
-  - Victory/defeat alerts
+  - Battle result modals with clear feedback
+  - Continue fighting or close after victory/defeat
 - **Enemy Management**: Set enemy Skill and Stamina before combat
+- **Battle Modals**: Visual feedback for battle outcomes (wounded, enemy wounded, dead, enemy dead, draw)
 
-### Navigation
+### Luck Check System
+- **Luck Testing**: Fully implemented luck check functionality
+- **Luck Check Modal**: Interactive modal for testing your character's luck
+- **Automatic Luck Reduction**: Testing luck decreases your Luck stat by 1
+- **Roll Mechanics**: Roll 2d6 and compare against current Luck stat
+- **Result Feedback**: Clear indication of lucky or unlucky outcomes
+- **Auto-save**: Luck stat changes are automatically saved to the backend
+
+### Navigation & UI
 - **Multi-page Routing**: Navigate between main page, character selection, and battle screens
 - **Intuitive UI**: Clear navigation buttons and organized page structure
+- **Modern Design**: Dark theme with gradient backgrounds, glassmorphism effects, and smooth animations
+- **Responsive Layout**: Two-column battle layout that adapts to mobile screens
+- **Modal System**: Overlay modals for battle results and luck checks
 
 ## Getting Started
 
@@ -89,20 +105,25 @@ npm run preview
 - **`src/App.tsx`**: Main app component with React Router setup and route definitions
 - **`src/main.tsx`**: Application entry point with BrowserRouter wrapper
 - **`src/store.ts`**: Zustand store for global character state management
+- **`src/App.css`**: Component-specific styles and layout utilities
+- **`src/index.css`**: Global styles, theme variables, and base component styles
 
 ### Components
 
 #### Pages
-- **`src/components/MainPage.tsx`**: Main landing page with navigation buttons and character display/creation
+- **`src/components/MainPage.tsx`**: Main landing page with navigation toolbar, character display/creation, and luck check button
 - **`src/components/CharactersSelect.tsx`**: Character selection page with table view, select, and delete functionality
-- **`src/components/BattleSheet.tsx`**: Battle interface with combat mechanics and enemy management
+- **`src/components/BattleSheet.tsx`**: Battle interface with combat mechanics, enemy management, and battle modal integration
 
 #### Character Components
-- **`src/components/CharacterSheet.tsx`**: Displays character stats with manual adjustment buttons
-- **`src/components/CharacterCreationSheet.tsx`**: Form for creating new characters
+- **`src/components/CharacterSheet.tsx`**: Displays character stats with manual adjustment buttons that auto-save
+- **`src/components/CharacterCreationSheet.tsx`**: Form for creating new characters using Material UI components
 
-#### Check Components (Placeholders)
-- **`src/components/CheckComponents/SkillCheck.tsx`**: Placeholder for skill-check functionality
+#### Battle Components
+- **`src/components/BattleComponents/BattleModal.tsx`**: Modal component for displaying battle results with options to continue fighting or close
+
+#### Check Components
+- **`src/components/CheckComponents/LuckCheckModal.tsx`**: Modal component for testing luck with automatic luck reduction and result feedback
 
 ### Utilities
 - **`src/utils/api.ts`**: API client functions:
@@ -110,6 +131,8 @@ npm run preview
   - `createCharacter(character)`: Create a new character
   - `updateCharacter(character, id)`: Update an existing character
   - `deleteCharacter(id)`: Delete a character
+- **`src/utils/utilityFunctions.ts`**: Helper functions:
+  - `updateCharacterStats(player)`: Utility function to update character stats on the backend
 
 ## Routing
 
@@ -141,9 +164,19 @@ type Character = {
     luck: number;
     gold: number;
 }
+
+type CharacterDto = {
+    name: string;
+    skill: number;
+    stamina: number;
+    luck: number;
+    gold: number;
+}
 ```
 
-## Battle Mechanics
+## Game Mechanics
+
+### Battle Mechanics
 
 The battle system uses Fighting Fantasy combat rules:
 - Each combatant rolls 2d6 + Skill
@@ -151,6 +184,32 @@ The battle system uses Fighting Fantasy combat rules:
 - Winner deals 2 Stamina damage
 - Combat continues until one combatant reaches 0 Stamina
 - Character stats are automatically saved after taking damage
+- Battle results are displayed in a modal with options to continue or close
+
+### Luck Check Mechanics
+
+- Roll 2d6 and compare the result to your current Luck stat
+- If the roll is less than or equal to your Luck: **Lucky** ✓
+- If the roll is greater than your Luck: **Unlucky** ✗
+- Testing your luck automatically decreases your Luck stat by 1
+- Luck changes are automatically saved to the backend
+
+## Styling & Design
+
+The application features a modern dark theme with:
+
+- **Custom CSS Variables**: Theme colors, spacing, and effects defined in `index.css`
+- **Glassmorphism**: Translucent panels with backdrop blur effects
+- **Gradient Backgrounds**: Radial gradients for visual depth
+- **Responsive Design**: Mobile-friendly layouts with media queries
+- **Smooth Animations**: Hover effects and transitions (respects `prefers-reduced-motion`)
+- **Component Classes**: Reusable utility classes for consistent styling:
+  - `.page-header`: Page header with toolbar
+  - `.panel`: Content panels with glassmorphism
+  - `.two-col`: Two-column grid layout
+  - `.form-grid`: Form input grid
+  - `.stat-list` / `.stat-row`: Character stat display
+  - `.modal-background` / `.modal-container`: Modal styling
 
 ## Development
 
@@ -163,6 +222,8 @@ The battle system uses Fighting Fantasy combat rules:
 
 ### Notes
 
-- The battle and skill-check components are fully functional for battles, with skill-check functionality planned for future updates
-- Character stats persist automatically after battles via the update API
+- Character stats persist automatically after battles, luck checks, and manual adjustments via the update API
 - The app uses Zustand for lightweight state management without requiring Redux
+- All modals use a consistent styling system with backdrop blur
+- The UI is fully responsive and works on mobile devices
+- Battle and luck check features are fully functional and integrated with the backend
