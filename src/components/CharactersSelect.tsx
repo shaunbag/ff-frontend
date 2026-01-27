@@ -1,7 +1,7 @@
-import { useEffect } from "react"
-import { useCharacterStore } from "../store"
-import { getAllCharacters, deleteCharacter } from "../utils/api"
-import { useNavigate } from "react-router-dom"
+import { useEffect } from 'react'
+import { useCharacterStore } from '../store'
+import { getAllCharacters, deleteCharacter } from '../utils/api'
+import { useNavigate } from 'react-router-dom'
 
 export default function CharacterSelect() {
 
@@ -23,6 +23,7 @@ export default function CharacterSelect() {
     function selectCharacter(id: number) {
         const selected = allCharacters.find(c => c.id === id)
         if (selected) setCharacter(selected)
+            history('/')
     }
 
     function deleteCharacterFromSavedCharacters(id: number) {
@@ -33,13 +34,13 @@ export default function CharacterSelect() {
 
     return (
         <>
-        <header className="page-header">
+        <header className='page-header'>
             <h2>Selected Character: {character.name}</h2>
-            <div className="toolbar">
+            <div className='toolbar'>
                 <button onClick={() => history('/')}>BACK</button>
             </div>
         </header>
-            <section className="panel">
+            <section className='panel'>
             <table>
                 <thead>
                     <tr>
