@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useCharacterStore } from "../store";
-import CharacterSheet from "./CharacterSheet";
-import { useNavigate } from "react-router-dom";
-import type { BattleResult } from "./BattleComponents/BattleModal";
-import BattleModal from "./BattleComponents/BattleModal";
-import { updateCharacterStats } from "../utils/utilityFunctions";
+import { useState } from 'react';
+import { useCharacterStore } from '../store';
+import CharacterSheet from './CharacterSheet';
+import { useNavigate } from 'react-router-dom';
+import type { BattleResult } from './BattleComponents/BattleModal';
+import BattleModal from './BattleComponents/BattleModal';
+import { updateCharacterStats } from '../utils/utilityFunctions';
 
 export type Enemy = {
     skill: number;
@@ -15,7 +15,7 @@ export default function BattleSheet() {
 
     const { character, setCharacter } = useCharacterStore()
     const [enemy, setEnemy] = useState<Enemy>({skill: 0, stamina: 0})
-    const [result, setResult] = useState<BattleResult | "">("")
+    const [result, setResult] = useState<BattleResult | ''>('')
     const [showModal, setShowModal] = useState(false)
     const history = useNavigate()
 
@@ -28,9 +28,9 @@ export default function BattleSheet() {
             setEnemy(enemyUpdate)
 
             if(enemyUpdate.stamina <= 0){
-                setResult("enemy dead")
+                setResult('enemy dead')
             } else {
-                setResult("enemy wounded")
+                setResult('enemy wounded')
             }
             setShowModal(true)
             return
@@ -40,16 +40,16 @@ export default function BattleSheet() {
             setCharacter(playerUpdate)
 
             if(playerUpdate.stamina <= 0){
-                setResult("dead")
+                setResult('dead')
             } else {
-                setResult("wounded")
+                setResult('wounded')
             }
             updateCharacterStats(playerUpdate)
             setShowModal(true)
             return
         }
         if(playersRoll === enemiesRoll){
-            setResult("draw")
+            setResult('draw')
             setShowModal(true)
             return
         }
@@ -57,26 +57,26 @@ export default function BattleSheet() {
 
     return (
         <div>
-            <header className="page-header">
+            <header className='page-header'>
                 <h1>Battle</h1>
-                <div className="toolbar">
+                <div className='toolbar'>
                     <button onClick={() => history('/')}>Back</button>
                     <button onClick={() => fightABattle()}>Fight!</button>
                 </div>
             </header>
 
-            <div className="two-col">
-                <section className="panel">
+            <div className='two-col'>
+                <section className='panel'>
                     <CharacterSheet />
                 </section>
 
-                <section className="panel">
+                <section className='panel'>
                     <h2>Enemy</h2>
-                    <div className="form-grid">
+                    <div className='form-grid'>
                         <label>Skill</label>
-                        <input type="number" placeholder="Skill" value={enemy.skill} onChange={(e) => setEnemy({...enemy, skill: Number(e.target.value)})} />
+                        <input type='number' placeholder='Skill' value={enemy.skill} onChange={(e) => setEnemy({...enemy, skill: Number(e.target.value)})} />
                         <label>Stamina</label>
-                        <input type="number" placeholder="Stamina" value={enemy.stamina} onChange={(e) => setEnemy({...enemy, stamina: Number(e.target.value)})} />
+                        <input type='number' placeholder='Stamina' value={enemy.stamina} onChange={(e) => setEnemy({...enemy, stamina: Number(e.target.value)})} />
                     </div>
                 </section>
             </div>

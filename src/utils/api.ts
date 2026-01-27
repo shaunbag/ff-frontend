@@ -1,4 +1,4 @@
-import type { Character, CharacterDto } from "../store";
+import type { Character, CharacterDto, Item, ItemDto } from '../store';
 
 async function apiPost<T>(endpoint: string, body: string) {
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/${endpoint}`, {
@@ -39,12 +39,13 @@ async function apiDelete(endpoint: string, id: number) {
 
 }
 
+// Character Api Methods
 export async function getAllCharacters(): Promise<Character[]> {
-    return apiGet<Character[]>('api/all')
+    return apiGet<Character[]>('api/character')
 }
 
 export async function createCharacter(character: CharacterDto): Promise<Character> {
-    return apiPost('api/createcharacter', JSON.stringify(character))
+    return apiPost('api/character', JSON.stringify(character))
 }
 
 export async function deleteCharacter(id: number): Promise<void> {
@@ -53,4 +54,30 @@ export async function deleteCharacter(id: number): Promise<void> {
 
 export async function updateCharacter(character: CharacterDto, id: number): Promise<Character> {
     return apiPost(`api/character/${id}`, JSON.stringify(character))
+}
+
+//Potions Api Methods
+export async function getPotionsByCharacterId(id: number): Promise<Item[]> {
+    return apiGet<Item[]>(`api/potions/${id}`)
+}
+
+export async function addPotion(item: ItemDto): Promise<Item>{
+    return apiPost(`api/potions`, JSON.stringify(item))
+}
+
+export async function deletePotion(id: number): Promise<void>{
+    return apiDelete('api/equipment', id)
+}
+
+// Equipment Api Methods
+export async function getEquipmentByCharacterId(id: number): Promise<Item[]> {
+    return apiGet<Item[]>(`api/equipment/${id}`)
+}
+
+export async function addEquipment(item: ItemDto): Promise<Item>{
+    return apiPost(`api/equipment`, JSON.stringify(item))
+}
+
+export async function deleteEquipment(id: number): Promise<void>{
+    return apiDelete('api/equipment', id)
 }

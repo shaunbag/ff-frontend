@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-export type BattleResult = "wounded" | "enemy wounded" | "dead" | "enemy dead" | "draw" | "";
+export type BattleResult = 'wounded' | 'enemy wounded' | 'dead' | 'enemy dead' | 'draw' | '';
 
 type Props = {
     setShowModal: (bool: boolean) => void;
@@ -10,7 +10,7 @@ type Props = {
 
 export default function BattleModal({ setShowModal, result, fightAgain }: Props) {
 
-    const [text, setText] = useState("")
+    const [text, setText] = useState('')
 
     useEffect(() => {
         battleOutcome(result)
@@ -18,22 +18,22 @@ export default function BattleModal({ setShowModal, result, fightAgain }: Props)
 
     function battleOutcome(result: BattleResult) {
         switch (result) {
-            case "wounded":
-                setText("⚔️ You have been Wounded ⚔️")
+            case 'wounded':
+                setText('⚔️ You have been Wounded ⚔️')
                 break;
-            case "enemy wounded":
-                setText("⚔️ You scored a hit ⚔️")
+            case 'enemy wounded':
+                setText('⚔️ You scored a hit ⚔️')
                 break;
-            case "dead":
-                setText("💀 You have been Killed R.I.P 💀")
+            case 'dead':
+                setText('💀 You have been Killed R.I.P 💀')
                 break;
-            case "enemy dead":
-                setText("⚔️ You Destroyed the Enemy ⚔️")
+            case 'enemy dead':
+                setText('⚔️ You Destroyed the Enemy ⚔️')
                 break;
-            case "draw":
-                setText("⚔️ It Was A Draw ⚔️")
+            case 'draw':
+                setText('⚔️ It Was A Draw ⚔️')
                 break;
-            case "":
+            case '':
                 setShowModal(false)
                 break;
             default:
@@ -43,11 +43,11 @@ export default function BattleModal({ setShowModal, result, fightAgain }: Props)
     }
 
     return (
-        <div className="modal-background">
-            <div className="modal-container">
+        <div className='modal-background'>
+            <div className='modal-container'>
                 <h2>{text}</h2>
                 {
-                    result === "draw" || result === "wounded" || result === "enemy wounded"
+                    result === 'draw' || result === 'wounded' || result === 'enemy wounded'
                         ?
                         <button onClick={() => fightAgain()}>Fight Another Round</button>
                         :

@@ -1,5 +1,5 @@
-import type { Character, CharacterDto } from "../store"
-import { updateCharacter } from "./api"
+import type { Character, CharacterDto } from '../store'
+import { updateCharacter } from './api'
 
 export function updateCharacterStats(player: Character){
         const characterDto: CharacterDto = {

@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useCharacterStore } from "../store";
-import CharacterCreationSheet from "./CharacterCreationSheet";
-import CharacterSheet from "./CharacterSheet";
-import { useNavigate } from "react-router-dom";
-import LuckCheckModal from "./CheckComponents/LuckCheckModal";
+import { useState } from 'react';
+import { useCharacterStore } from '../store';
+import CharacterCreationSheet from './CharacterCreationSheet';
+import CharacterSheet from './CharacterSheet';
+import { useNavigate } from 'react-router-dom';
+import LuckCheckModal from './CheckComponents/LuckCheckModal';
+import Equipment from './ItemsAndEquipmentComponents/Equipment';
+import Potions from './ItemsAndEquipmentComponents/Potions';
 
 export default function MainPage() {
 
@@ -14,7 +16,7 @@ export default function MainPage() {
     function createNewCharacter() {
         setCharacter({
             id: 0,
-            name: "",
+            name: '',
             skill: 0,
             stamina: 0,
             luck: 0,
@@ -24,29 +26,37 @@ export default function MainPage() {
 
     return (
         <>
-            <header className="page-header">
+            <header className='page-header'>
                 <h1>Fighting Fantasy Character Tracking</h1>
-                <div className="toolbar">
+                <nav className='toolbar'>
                     <button onClick={() => history('/select')}>SELECT A CHARACTER</button>
                     <button onClick={createNewCharacter}>CREATE NEW CHARACTER</button>
-                    <button style={{backgroundColor: 'red'}} onClick={() => history('/battle')}>FIGHT A BATTLE</button>
-                    <button style={{backgroundColor: 'green'}}onClick={() => setShowLuckModal(true)}>CHECK LUCK</button>
-                </div>
+                    <button style={{ backgroundColor: 'red' }} onClick={() => history('/battle')}>FIGHT A BATTLE</button>
+                    <button style={{ backgroundColor: 'green' }} onClick={() => setShowLuckModal(true)}>CHECK LUCK</button>
+                </nav>
             </header>
             {
                 character.name ? (
-                    <section className="panel">
-                        <CharacterSheet />
-                    </section>
+                    <>
+                        <section className='panel'>
+                            <CharacterSheet />
+                        </section>
+                        <section className='panel'>
+                            <Equipment />
+                        </section>
+                        <section className='panel'>
+                            <Potions />
+                        </section>
+                    </>
                 ) : (
-                    <section className="panel">
+                    <section className='panel'>
                         <CharacterCreationSheet />
                     </section>
                 )
             }
             {
                 showLuckModal && (
-                    <LuckCheckModal setShowLuckModal={setShowLuckModal}/>
+                    <LuckCheckModal setShowLuckModal={setShowLuckModal} />
                 )
             }
         </>
