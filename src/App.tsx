@@ -1,8 +1,8 @@
 import './App.css'
-import CharacterSelect from './components/CharactersSelect';
+import CharacterSelect from './components/CharacterComponents/CharactersSelect';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './components/MainPage';
-import BattleSheet from './components/BattleSheet';
+import BattleSheet from './components/BattleComponents/BattleSheet';
 
 function App() {
 

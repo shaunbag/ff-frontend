@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useCharacterStore } from '../store'
-import { getAllCharacters, deleteCharacter } from '../utils/api'
+import { useCharacterStore } from '../../store'
+import { getAllCharacters, deleteCharacter } from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
 
 export default function CharacterSelect() {

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useCharacterStore } from '../store';
-import CharacterSheet from './CharacterSheet';
+import { useCharacterStore } from '../../store';
+import CharacterSheet from '../CharacterComponents/CharacterSheet';
 import { useNavigate } from 'react-router-dom';
-import type { BattleResult } from './BattleComponents/BattleModal';
-import BattleModal from './BattleComponents/BattleModal';
-import { updateCharacterStats } from '../utils/utilityFunctions';
+import type { BattleResult } from './BattleModal';
+import BattleModal from './BattleModal';
+import { updateCharacterStats } from '../../utils/utilityFunctions';
 
 export type Enemy = {
     skill: number;

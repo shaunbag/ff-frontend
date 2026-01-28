@@ -1,4 +1,4 @@
-import type { Character, CharacterDto, Item, ItemDto } from '../store';
+import type { Character, CharacterDto, Item, ItemDto, Progress, ProgressDto } from '../store';
 
 async function apiPost<T>(endpoint: string, body: string) {
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/${endpoint}`, {
@@ -80,4 +80,21 @@ export async function addEquipment(item: ItemDto): Promise<Item>{
 
 export async function deleteEquipment(id: number): Promise<void>{
     return apiDelete('api/equipment', id)
+}
+
+// Progress Api Methods
+export async function getProgressByCharacterId(id: number): Promise<Progress[]> {
+    return apiGet<Progress[]>(`api/progress/${id}`)
+}
+
+export async function addProgress(progressDto: ProgressDto): Promise<Progress> {
+    return apiPost('api/progress', JSON.stringify(progressDto))
+}
+
+export async function deleteProgressById(id: number): Promise<void> {
+    return apiDelete('api/progress', id)
+}
+
+export async function updateProgressById(id: number, progressDto: ProgressDto): Promise<Progress> {
+    return apiPost(`api/progress/${id}`,JSON.stringify(progressDto))
 }

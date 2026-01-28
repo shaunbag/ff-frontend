@@ -1,5 +1,5 @@
-import { useCharacterStore } from '../store'
-import { updateCharacterStats } from '../utils/utilityFunctions';
+import { useCharacterStore } from '../../store'
+import { updateCharacterStats } from '../../utils/utilityFunctions';
 
 type StatKey = 'skill' | 'stamina' | 'luck' | 'gold'
 
