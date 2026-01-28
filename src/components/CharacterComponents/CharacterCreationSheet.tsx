@@ -1,7 +1,7 @@
 import { TextField, Button } from '@mui/material'
 import React from 'react'
-import { createCharacter } from '../utils/api';
-import { useCharacterStore } from '../store';
+import { createCharacter } from '../../utils/api';
+import { useCharacterStore } from '../../store';
 
 export default function CharacterCreationSheet() {
 

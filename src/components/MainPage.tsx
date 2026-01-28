@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useCharacterStore } from '../store';
-import CharacterCreationSheet from './CharacterCreationSheet';
-import CharacterSheet from './CharacterSheet';
+import CharacterCreationSheet from './CharacterComponents/CharacterCreationSheet';
+import CharacterSheet from './CharacterComponents/CharacterSheet';
 import { useNavigate } from 'react-router-dom';
 import LuckCheckModal from './CheckComponents/LuckCheckModal';
 import Equipment from './ItemsAndEquipmentComponents/Equipment';
 import Potions from './ItemsAndEquipmentComponents/Potions';
+import ProgressTracker from './ProgressComponents/ProgressTracker';
 
 export default function MainPage() {
 
@@ -46,6 +47,9 @@ export default function MainPage() {
                         </section>
                         <section className='panel'>
                             <Potions />
+                        </section>
+                        <section className='panel'>
+                            <ProgressTracker />
                         </section>
                     </>
                 ) : (
