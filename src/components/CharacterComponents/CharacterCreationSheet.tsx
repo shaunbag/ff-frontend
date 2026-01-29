@@ -19,7 +19,8 @@ export default function CharacterCreationSheet() {
             skill: skill,
             luck: luck,
             stamina: stamina,
-            gold: gold
+            gold: gold,
+            provisions: 10
         }
 
         try {
