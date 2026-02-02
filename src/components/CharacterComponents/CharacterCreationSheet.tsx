@@ -14,8 +14,9 @@ export default function CharacterCreationSheet() {
 
     function handleCreateCharacter() {
         console.log('Character Created:', { name, skill, stamina, luck, gold });
+ 
         const Character = {
-            name: name,
+            name: name.trim(),
             skill: skill,
             luck: luck,
             stamina: stamina,
@@ -34,10 +35,16 @@ export default function CharacterCreationSheet() {
         }
     }
 
+    function generateRandomCharacter(){
+        setSkill((Math.floor(Math.random()* 6)) + 6)
+        setStamina((Math.floor(Math.random() * 12)) + 12)
+        setLuck((Math.floor(Math.random() * 6)) + 6)
+    }
+
     return (
         <section>
             <h1>Character Creation Sheet</h1>
-            <TextField label='Name' variant='outlined' value={name} onChange={(e) => setName(e.target.value)} />
+            <TextField label='Name' variant='filled' value={name} sx={{ input: { color: 'white' } }} onChange={(e) => setName(e.target.value)} />
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <label>Skill</label>
                 <input type='number' placeholder='Skill' value={skill} onChange={(e) => setSkill(Number(e.target.value))} />
@@ -48,8 +55,8 @@ export default function CharacterCreationSheet() {
                 <label>Gold</label>
                 <input type='number' placeholder='Gold' value={gold} onChange={(e) => setGold(Number(e.target.value))} />
             </div>
-            
-            <Button variant='contained' color='primary' onClick={handleCreateCharacter}>Create Character</Button>
+            <Button variant='contained' color='primary' onClick={generateRandomCharacter}>Generate Random Character</Button>
+            <Button variant='contained' color='primary' disabled={name ? false :  true} onClick={handleCreateCharacter}>Create Character</Button>
         </section>
     )
 }
