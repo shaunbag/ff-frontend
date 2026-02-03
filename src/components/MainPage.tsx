@@ -10,7 +10,7 @@ import ProgressTracker from './ProgressComponents/ProgressTracker';
 
 export default function MainPage() {
 
-    const { character, setCharacter } = useCharacterStore();
+    const { character, setCharacter, setCurrentBook } = useCharacterStore();
     const history = useNavigate();
     const [showLuckModal, setShowLuckModal] = useState(false);
 
@@ -22,7 +22,9 @@ export default function MainPage() {
             stamina: 0,
             luck: 0,
             gold: 0,
+            provisions: 0
         });
+        setCurrentBook({id: 0, book: "", section: 0, characterId: 0})
     }
 
     return (
