@@ -7,6 +7,7 @@ export type Character = {
     stamina: number;
     luck: number;
     gold: number;
+    provisions: number;
 }
 export type CharacterDto = {
     name: string;
@@ -14,6 +15,7 @@ export type CharacterDto = {
     stamina: number;
     luck: number;
     gold: number;
+    provisions: number;
 }
 export type Item = {
     id: number;
@@ -63,6 +65,7 @@ export const useCharacterStore = create<CharacterStore>((set) => ({
         stamina: 0,
         luck: 0,
         gold: 0,
+        provisions: 0
     },
     setCharacter: (character: Character) => set({ character }),
     progress: [],

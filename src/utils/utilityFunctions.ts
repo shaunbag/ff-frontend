@@ -7,7 +7,8 @@ export function updateCharacterStats(player: Character){
             skill: player.skill,
             luck: player.luck,
             stamina: player.stamina,
-            gold: player.gold
+            gold: player.gold,
+            provisions: player.provisions
         }
         updateCharacter(characterDto, player.id)
     }

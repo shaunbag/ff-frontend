@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function CharacterSelect() {
 
-    const { allCharacters, setAllCharacters, setCharacter, character } = useCharacterStore()
+    const { allCharacters, setAllCharacters, setCharacter, character,setCurrentBook } = useCharacterStore()
     const history = useNavigate()
 
     useEffect(() => {
@@ -22,7 +22,10 @@ export default function CharacterSelect() {
 
     function selectCharacter(id: number) {
         const selected = allCharacters.find(c => c.id === id)
-        if (selected) setCharacter(selected)
+        if (selected) {
+            setCharacter(selected)
+            setCurrentBook({id: 0, book: "", section: 0, characterId: 0})
+        }
             history('/')
     }
 

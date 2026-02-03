@@ -82,7 +82,7 @@ export default function BattleSheet() {
             </div>
             {
                 showModal && (
-                    <BattleModal result={result} setShowModal={setShowModal} fightAgain={fightABattle}/>
+                    <BattleModal result={result} setShowModal={setShowModal} fightAgain={fightABattle} setEnemy={setEnemy} enemy={enemy}/>
                 )
             }
         </div>
