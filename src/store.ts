@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Character, Progress, Item } from './utils/Types';
+import type { Character, Progress, Item, Treasure } from './utils/Types';
 
 
 type CharacterStore = {
@@ -15,6 +15,8 @@ type CharacterStore = {
     setEquipment: (equipment: Item[]) => void;
     currentBook: Progress;
     setCurrentBook: (currentBook: Progress) => void;
+    treasure: Treasure[];
+    setTreasure: (treasure: Treasure[]) => void;
 }
 
 export const useCharacterStore = create<CharacterStore>((set) => ({
@@ -37,5 +39,7 @@ export const useCharacterStore = create<CharacterStore>((set) => ({
     equipment: [],
     setEquipment: (equipment: Item[]) => set({equipment}),
     currentBook: {id: 0, book: "", section: 0, characterId: 0},
-    setCurrentBook: (currentBook: Progress) => set({currentBook})
+    setCurrentBook: (currentBook: Progress) => set({currentBook}),
+    treasure: [],
+    setTreasure: (treasure: Treasure[]) => set({treasure})
 }))
