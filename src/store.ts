@@ -1,46 +1,6 @@
 import { create } from 'zustand';
+import type { Character, Progress, Item, Treasure } from './utils/Types';
 
-export type Character = {
-    id: number;
-    name: string;
-    skill: number;
-    stamina: number;
-    luck: number;
-    gold: number;
-    provisions: number;
-}
-export type CharacterDto = {
-    name: string;
-    skill: number;
-    stamina: number;
-    luck: number;
-    gold: number;
-    provisions: number;
-}
-export type Item = {
-    id: number;
-    name: string;
-    effect: string;
-    characterId: number;
-}
-
-export type ItemDto = {
-    name: string;
-    effect: string;
-    characterId: number;
-}
-export type Progress = {
-    id: number;
-    book: string;
-    section: number;
-    characterId: number;
-}
-
-export type ProgressDto = {
-    book: string;
-    section: number;
-    characterId: number;
-}
 
 type CharacterStore = {
     character: Character;
@@ -55,6 +15,8 @@ type CharacterStore = {
     setEquipment: (equipment: Item[]) => void;
     currentBook: Progress;
     setCurrentBook: (currentBook: Progress) => void;
+    treasure: Treasure[];
+    setTreasure: (treasure: Treasure[]) => void;
 }
 
 export const useCharacterStore = create<CharacterStore>((set) => ({
@@ -77,5 +39,7 @@ export const useCharacterStore = create<CharacterStore>((set) => ({
     equipment: [],
     setEquipment: (equipment: Item[]) => set({equipment}),
     currentBook: {id: 0, book: "", section: 0, characterId: 0},
-    setCurrentBook: (currentBook: Progress) => set({currentBook})
+    setCurrentBook: (currentBook: Progress) => set({currentBook}),
+    treasure: [],
+    setTreasure: (treasure: Treasure[]) => set({treasure})
 }))

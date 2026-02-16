@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react'
 import { addEquipment, addPotion } from '../../utils/api';
-import { useCharacterStore, type ItemDto } from '../../store';
+import { useCharacterStore } from '../../store';
+import type { ItemDto } from '../../utils/Types';
 
 type Props = {
-    ItemType: 'equipment' | 'potion';
+    ItemType: 'equipment' | 'potion' | 'treasure';
     setShowItemModal: (value: boolean) => void;
     updateItems: () => void;
 }
@@ -37,6 +38,9 @@ export default function ItemModal({ ItemType, setShowItemModal, updateItems }: P
                 }).catch((error: Error) => {
                     console.log(error)
                 });
+                break;
+            default:
+                console.log(ItemType + " Not Found")
                 break;
         }
 

@@ -7,6 +7,7 @@ import LuckCheckModal from './CheckComponents/LuckCheckModal';
 import Equipment from './ItemsAndEquipmentComponents/Equipment';
 import Potions from './ItemsAndEquipmentComponents/Potions';
 import ProgressTracker from './ProgressComponents/ProgressTracker';
+import Treasure from './ItemsAndEquipmentComponents/Treasure';
 
 export default function MainPage() {
 
@@ -49,6 +50,9 @@ export default function MainPage() {
                         </section>
                         <section className='panel'>
                             <Potions />
+                        </section>
+                        <section className='panel'>
+                            <Treasure />
                         </section>
                         <section className='panel'>
                             <ProgressTracker />

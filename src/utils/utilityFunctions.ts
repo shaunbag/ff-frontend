@@ -1,4 +1,4 @@
-import type { Character, CharacterDto } from '../store'
+import type { Character, CharacterDto } from './Types'
 import { updateCharacter } from './api'
 
 export function updateCharacterStats(player: Character){
