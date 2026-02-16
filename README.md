@@ -47,7 +47,8 @@ A React + TypeScript frontend application for tracking **Fighting Fantasy** game
 ### Items & Equipment
 - **Equipment Management**: Add and remove equipment items for the active character, each with a name and effect
 - **Potion Management**: Track potions with name and effect per character
-- **Per‑character Inventories**: Equipment and potions are loaded and persisted per selected character via the backend
+  - **Treasure Management**: Track treasures (gold, items, valuables) per character with add/update/delete actions
+  - **Per‑character Inventories**: Equipment, potions, and treasure are loaded and persisted per selected character via the backend
 
 ### Progress Tracking
 - **Book Progress**: Track which Fighting Fantasy book and section a character is currently on
@@ -136,9 +137,11 @@ npm run preview
 - **`src/components/CheckComponents/LuckCheckModal.tsx`**: Modal component for testing luck with automatic luck reduction and result feedback
 
 #### Items & Equipment Components
-- **`src/components/ItemsAndEquipmentComponents/Equipment.tsx`**: Table view for a character’s equipment, with add and delete actions
-- **`src/components/ItemsAndEquipmentComponents/Potions.tsx`**: Table view for a character’s potions, with add and delete actions
-- **`src/components/ItemsAndEquipmentComponents/ItemModal.tsx`**: Shared modal for adding new equipment or potion items
+ - **`src/components/ItemsAndEquipmentComponents/Equipment.tsx`**: Table view for a character’s equipment, with add and delete actions
+ - **`src/components/ItemsAndEquipmentComponents/Potions.tsx`**: Table view for a character’s potions, with add and delete actions
+ - **`src/components/ItemsAndEquipmentComponents/Treasure.tsx`**: Table view for a character’s treasure, with add, update and delete actions
+ - **`src/components/ItemsAndEquipmentComponents/TreasureModal.tsx`**: Modal for adding/updating treasure entries
+ - **`src/components/ItemsAndEquipmentComponents/ItemModal.tsx`**: Shared modal for adding new equipment or potion items
 
 #### Progress Components
 - **`src/components/ProgressComponents/ProgressTracker.tsx`**: Displays the current book and section and lets you switch between saved progress entries
@@ -191,6 +194,12 @@ This frontend expects a backend API that implements the following endpoints:
   - `GET /api/potions/{characterId}` - Returns all potions for a character
   - `POST /api/potions` - Adds a new potion for a character
   - `DELETE /api/potions/{id}` - Deletes a potion by ID
+
+- **Treasure**
+  - `GET /api/treasure/{characterId}` - Returns all treasure entries for a character
+  - `POST /api/treasure` - Adds a new treasure entry for a character
+  - `POST /api/treasure/{id}` - Updates an existing treasure entry
+  - `DELETE /api/treasure/{id}` - Deletes a treasure entry by ID
 
 - **Progress**
   - `GET /api/progress/{characterId}` - Returns all saved progress entries (book/section) for a character
