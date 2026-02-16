@@ -1,4 +1,4 @@
-import type { Character, CharacterDto, Item, ItemDto, Progress, ProgressDto } from '../store';
+import type { Character, CharacterDto, Item, ItemDto, Progress, ProgressDto, Treasure, TreasureDto } from './Types';
 
 async function apiPost<T>(endpoint: string, body: string) {
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/${endpoint}`, {
@@ -41,24 +41,24 @@ async function apiDelete(endpoint: string, id: number) {
 
 // Character Api Methods
 export async function getAllCharacters(): Promise<Character[]> {
-    return apiGet<Character[]>('api/character')
+    return apiGet<Character[]>('api/character');
 }
 
 export async function createCharacter(character: CharacterDto): Promise<Character> {
-    return apiPost('api/character', JSON.stringify(character))
+    return apiPost('api/character', JSON.stringify(character));
 }
 
 export async function deleteCharacter(id: number): Promise<void> {
-    return apiDelete('api/character', id)
+    return apiDelete('api/character', id);
 }
 
 export async function updateCharacter(character: CharacterDto, id: number): Promise<Character> {
-    return apiPost(`api/character/${id}`, JSON.stringify(character))
+    return apiPost(`api/character/${id}`, JSON.stringify(character));
 }
 
 //Potions Api Methods
 export async function getPotionsByCharacterId(id: number): Promise<Item[]> {
-    return apiGet<Item[]>(`api/potions/${id}`)
+    return apiGet<Item[]>(`api/potions/${id}`);
 }
 
 export async function addPotion(item: ItemDto): Promise<Item>{
@@ -66,35 +66,52 @@ export async function addPotion(item: ItemDto): Promise<Item>{
 }
 
 export async function deletePotion(id: number): Promise<void>{
-    return apiDelete('api/equipment', id)
+    return apiDelete('api/equipment', id);
 }
 
 // Equipment Api Methods
 export async function getEquipmentByCharacterId(id: number): Promise<Item[]> {
-    return apiGet<Item[]>(`api/equipment/${id}`)
+    return apiGet<Item[]>(`api/equipment/${id}`);
 }
 
 export async function addEquipment(item: ItemDto): Promise<Item>{
-    return apiPost(`api/equipment`, JSON.stringify(item))
+    return apiPost(`api/equipment`, JSON.stringify(item));
 }
 
 export async function deleteEquipment(id: number): Promise<void>{
-    return apiDelete('api/equipment', id)
+    return apiDelete('api/equipment', id);
 }
 
 // Progress Api Methods
 export async function getProgressByCharacterId(id: number): Promise<Progress[]> {
-    return apiGet<Progress[]>(`api/progress/${id}`)
+    return apiGet<Progress[]>(`api/progress/${id}`);
 }
 
 export async function addProgress(progressDto: ProgressDto): Promise<Progress> {
-    return apiPost('api/progress', JSON.stringify(progressDto))
+    return apiPost('api/progress', JSON.stringify(progressDto));
 }
 
 export async function deleteProgressById(id: number): Promise<void> {
-    return apiDelete('api/progress', id)
+    return apiDelete('api/progress', id);
 }
 
 export async function updateProgressById(id: number, progressDto: ProgressDto): Promise<Progress> {
-    return apiPost(`api/progress/${id}`,JSON.stringify(progressDto))
+    return apiPost(`api/progress/${id}`,JSON.stringify(progressDto));
+}
+
+// Treasure Methods 
+export async function getTreasureByCharacterId(id: number): Promise<Treasure[]> {
+    return apiGet(`api/treasure/${id}`);
+}
+
+export async function addTreasure(tresureDto: TreasureDto): Promise<Treasure> {
+    return apiPost('api/treasure', JSON.stringify(tresureDto));
+}
+
+export async function updateTreasureById(id:  number, tresureDto:TreasureDto): Promise<Treasure> {
+    return apiPost(`api/trasure/${id}`, JSON.stringify(tresureDto));
+}
+
+export async function deleteTreasureById(id: number): Promise<void> {
+    return apiDelete(`api/treasure`, id);
 }

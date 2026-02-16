@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
-import { useCharacterStore, type ProgressDto } from "../../store";
+import { useCharacterStore } from "../../store";
 import { addProgress, updateProgressById } from "../../utils/api";
+import type { ProgressDto } from "../../utils/Types";
 
 type Props = {
     setShowProgressModal: (value: boolean) => void;
