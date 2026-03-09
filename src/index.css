@@ -24,7 +24,7 @@
   background: radial-gradient(1200px 800px at 20% 10%, #13264a 0%, transparent 60%),
     radial-gradient(900px 600px at 80% 20%, #1b2a5f 0%, transparent 55%),
     linear-gradient(180deg, var(--bg), var(--bg2));
-
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

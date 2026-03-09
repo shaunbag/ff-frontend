@@ -18,7 +18,7 @@ export default function CharacterSheet() {
     function updateStat(key: StatKey, value: number) {
         let updatedCharacter;
         if(key === 'provisions'){
-            updatedCharacter = {...character, [key]: value, stamina: character.stamina + 4}
+            updatedCharacter = {...character, [key]: value - 1, stamina: character.stamina + 4,}
         } else {
             updatedCharacter = { ...character, [key]: value }
         }

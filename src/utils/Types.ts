@@ -19,13 +19,21 @@ export type Item = {
     id: number;
     name: string;
     effect: string;
+    givesBonus: boolean;
+    bonus?: number | null;
+    skill?: string | null;
     characterId: number;
+    inUse: boolean;
 }
 
 export type ItemDto = {
     name: string;
     effect: string;
     characterId: number;
+    givesBonus: boolean;
+    bonus?: number | null;
+    skill?: string | null;
+    inUse: boolean;
 }
 export type Progress = {
     id: number;

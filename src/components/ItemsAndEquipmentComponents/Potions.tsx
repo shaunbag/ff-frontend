@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { useCharacterStore } from '../../store';
 import { deletePotion, getPotionsByCharacterId } from '../../utils/api';
 import ItemModal from './ItemModal';
+import type { Item } from '../../utils/Types';
+import { updateCharacterStats } from '../../utils/utilityFunctions';
 
 export default function Potions() {
 
-    const { potions, setPotions, character } = useCharacterStore();
+    const { potions, setPotions, character, setCharacter } = useCharacterStore();
     const [showItemModal, setShowItemModal] = useState<boolean>(false);
     const characterRef = useRef(character);
 
@@ -29,6 +31,24 @@ export default function Potions() {
         })
     }
 
+    async function usePotion(item: Item) {
+            await deletePotion(item.id)
+            switch (item.skill) {
+            case 'Skill':
+                const updateSkill = { ...character, skill: character.skill + (item.bonus ?? 0) }
+                setCharacter(updateSkill)
+                break;
+            case 'Stamina':
+                const updateStamina = { ...character, stamina: character.stamina + (item.bonus ?? 0) }
+                setCharacter(updateStamina)
+                break;
+            case 'Luck':
+                const updateLuck = { ...character, luck: character.luck + (item.bonus ?? 0) }
+                setCharacter(updateLuck)
+                break;
+        }
+    }
+
     return (
         <div>
             <h3>Potions</h3>
@@ -41,6 +61,7 @@ export default function Potions() {
                         <td>Name</td>
                         <td>Effect</td>
                         <td>DELETE</td>
+                        <td>USE</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +71,15 @@ export default function Potions() {
                                 <td>{item.name}</td>
                                 <td>{item.effect}</td>
                                 <td><button onClick={() => deletePotionFromList(item.id)}>DELETE</button></td>
+                                {
+                                    item.givesBonus && <td><button onClick={() => {
+                                        usePotion(item).then(() => {
+                                            updateCharacterStats(characterRef.current)
+                                        })
+                                    }}>
+                                        USE
+                                    </button></td>
+                                }
                             </tr>
                         })
                     }

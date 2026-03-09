@@ -66,7 +66,7 @@ export async function addPotion(item: ItemDto): Promise<Item>{
 }
 
 export async function deletePotion(id: number): Promise<void>{
-    return apiDelete('api/equipment', id);
+    return apiDelete('api/potions', id);
 }
 
 // Equipment Api Methods
@@ -80,6 +80,10 @@ export async function addEquipment(item: ItemDto): Promise<Item>{
 
 export async function deleteEquipment(id: number): Promise<void>{
     return apiDelete('api/equipment', id);
+}
+
+export async function updateEquipment(id: number, item: ItemDto): Promise<Item> {
+    return apiPost(`api/equipment/${id}`, JSON.stringify(item));
 }
 
 // Progress Api Methods
